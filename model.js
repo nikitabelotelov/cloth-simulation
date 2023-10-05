@@ -139,7 +139,7 @@ function calcualateColors(colors, lines, normalLengths, points) {
     const y = points[point1 * 3 + 1] - points[point2 * 3 + 1];
     const z = points[point1 * 3 + 2] - points[point2 * 3 + 2];
     const length = Math.sqrt(x * x + y * y + z * z);
-    const red = clamp((length / normalLengths[i / 2] - 1) * 5, 0, 1);
+    const red = clamp((length / normalLengths[i / 2] - 1) * 10, 0, 1);
     // colors.push(red, 0, 0, 1);
     colors[(i / 2) * 4] = red;
     colors[(i / 2) * 4 + 1] = 0;

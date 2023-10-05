@@ -31,7 +31,7 @@ function main() {
   let then = 0;
   let squareRotation = 0.0;
   let movement = true;
-  const sectorNumber = 18;
+  const sectorNumber = 16;
   const centerPointZ =
     Math.floor(((sectorNumber + 1) * (sectorNumber + 1)) / 2) * 3 + 2;
 
@@ -58,11 +58,11 @@ function main() {
 
   function render(now) {
     now *= 0.001; // convert to seconds
-    deltaTime = now - then;
+    deltaTime = (now - then);
     then = now;
     // model.points[0]
     if (movement) {
-      model.points[centerPointZ] = Math.sin(now * 5) / 10;
+      model.points[centerPointZ] = Math.sin(now * 3) / 10;
     }
     model.step(deltaTime);
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
