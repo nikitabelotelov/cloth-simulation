@@ -3,13 +3,17 @@ function clamp(val, min, max) {
 }
 
 /**
- * Generates a cloth model with the given size.
- * @param {*} size
- * @param {*} min_coord
- * @param {*} max_coord
- * @param {*} gravityVector
- * @param {*} lengthCoefficient
- * @returns
+ * Generates a cloth model with the given simulation parameters.
+ * @param {Object} config - The simulation parameters.
+ * @param {number} [config.size=0] - The size of the cloth model.
+ * @param {number} [config.min_coord=-1] - The minimum coordinate value for the cloth model.
+ * @param {number} [config.max_coord=1] - The maximum coordinate value for the cloth model.
+ * @param {number[]} [config.gravityVector=[0, 0, 0]] - The gravity vector applied to the cloth model.
+ * @param {number} [config.lengthCoefficient=1] - The coefficient used to calculate the length of the connections between points in the cloth model.
+ * @param {number} [config.pointWeight=0.00005] - The weight of each point in the cloth model.
+ * @param {number} [config.connectionCoef=50] - The coefficient used to calculate the force between connected points in the cloth model.
+ * @param {number} [config.damping=0.001] - The damping coefficient used to simulate air resistance in the cloth model.
+ * @returns {Object} The cloth model object.
  */
 function generateClothModel({
   size = 0,

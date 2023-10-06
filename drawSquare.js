@@ -1,8 +1,6 @@
-import { mat4 } from '/libs/gl-matrix.js'
+import { mat4 } from './libs/gl-matrix.js'
 
 function drawScene(gl, programInfo, buffers, squareRotation, model, drawMode) {
-  // gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
-  // gl.clearDepth(1.0); // Clear everything
   gl.enable(gl.DEPTH_TEST); // Enable depth testing
   gl.depthFunc(gl.LEQUAL); // Near things obscure far things
 
@@ -23,8 +21,7 @@ function drawScene(gl, programInfo, buffers, squareRotation, model, drawMode) {
   const zFar = 100.0;
   const projectionMatrix = mat4.create();
 
-  // note: glmatrix.js always has the first argument
-  // as the destination to receive the result.
+  // configurate camera projection matrix
   mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
   // mat4.rotate(projectionMatrix, projectionMatrix, -Math.PI / 4, [1, 0, 0])
   mat4.translate(projectionMatrix, projectionMatrix, [0, 0.1, -4]);

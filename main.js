@@ -76,9 +76,12 @@ function main() {
     now *= 0.001; // convert to seconds
     const deltaTime = now - prevTimeRender;
     prevTimeRender = now;
-    gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
-    gl.clearDepth(1.0); // Clear everything
+
+    // clear canvas
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearDepth(1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
     // Draw triangles
     let buffers = initBuffers(gl, modelTriangles, gl.TRIANGLES);
     drawScene(
@@ -92,8 +95,8 @@ function main() {
     // Draw lines
     buffers = initBuffers(gl, modelLines, gl.LINES);
     drawScene(gl, programInfo, buffers, squareRotation, modelLines, gl.LINES);
+    
     squareRotation += deltaTime * 10;
-
     renderTimeoutId = setTimeout(() => render(new Date().getTime()), 32);
   }
 
