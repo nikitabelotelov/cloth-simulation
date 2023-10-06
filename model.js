@@ -2,10 +2,6 @@ function clamp(val, min, max) {
   return Math.min(Math.max(val, min), max);
 }
 
-const POINT_WEIGHT = 0.001;
-const CONNECTION_COEF = 1000;
-const DAMPING = 0.001;
-
 /**
  * Generates a cloth model with the given size.
  * @param {*} size
@@ -15,13 +11,16 @@ const DAMPING = 0.001;
  * @param {*} lengthCoefficient
  * @returns
  */
-function generateClothModel(
-  size,
+function generateClothModel({
+  size = 0,
   min_coord = -1,
   max_coord = 1,
   gravityVector = [0, 0, 0],
-  lengthCoefficient = 1
-) {
+  lengthCoefficient = 1,
+  pointWeight = 0.00005,
+  connectionCoef = 50,
+  damping = 0.001,
+}) {
   const points = [];
 
   const shift = (max_coord - min_coord) / size;
@@ -47,6 +46,7 @@ function generateClothModel(
   pinned[(size + 1) * (size + 1) - 1] = true;
 
   return {
+    size,
     gravityVector,
     normalLengths,
     points,
@@ -55,6 +55,9 @@ function generateClothModel(
     connections,
     pinned,
     colors,
+    pointWeight,
+    connectionCoef,
+    damping,
     prevPoints: points.slice(),
     calculateForces() {
       const gravityVector = this.gravityVector;
@@ -79,11 +82,11 @@ function generateClothModel(
             forces[pointIndex] = [0, 0, 0];
           }
           forces[pointIndex][0] +=
-            nx * force * CONNECTION_COEF + gravityVector[0] * POINT_WEIGHT;
+            nx * force * this.connectionCoef + gravityVector[0] * this.pointWeight;
           forces[pointIndex][1] +=
-            ny * force * CONNECTION_COEF + gravityVector[1] * POINT_WEIGHT;
+            ny * force * this.connectionCoef + gravityVector[1] * this.pointWeight;
           forces[pointIndex][2] +=
-            nz * force * CONNECTION_COEF + gravityVector[2] * POINT_WEIGHT;
+            nz * force * this.connectionCoef + gravityVector[2] * this.pointWeight;
         }
       }
       return forces;
@@ -108,9 +111,9 @@ function generateClothModel(
         const oldY = this.prevPoints[i + 1];
         const oldZ = this.prevPoints[i + 2];
         const force = forces[pointIndex];
-        const newX = x + (1 - DAMPING) * (x - oldX) + force[0] * dt * dt;
-        const newY = y + (1 - DAMPING) * (y - oldY) + force[1] * dt * dt;
-        const newZ = z + (1 - DAMPING) * (z - oldZ) + force[2] * dt * dt;
+        const newX = x + (1 - this.damping) * (x - oldX) + force[0] * dt * dt;
+        const newY = y + (1 - this.damping) * (y - oldY) + force[1] * dt * dt;
+        const newZ = z + (1 - this.damping) * (z - oldZ) + force[2] * dt * dt;
         points[i] = newX;
         points[i + 1] = newY;
         points[i + 2] = newZ;

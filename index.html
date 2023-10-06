@@ -3,28 +3,53 @@
 
 <head>
   <meta charset="utf-8" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
-    integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
-    crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="libs/gl-matrix.js" type="module"></script>
+  <script src="ui.js" type="module"></script>
   <script src="shaderSource.js" type="module"></script>
   <script src="shaders.js" type="module"></script>
   <script src="model.js" type="module"></script>
-  <script src="main.js" type="module"></script>
   <script src="initBuffers.js" type="module"></script>
   <script src="drawSquare.js" type="module"></script>
-  <script src="script.js" type="module"></script>
+  <script src="main.js" type="module"></script>
   <title>WebGL Demo</title>
 </head>
 
 <body>
-  <canvas id="glcanvas" width="640" height="480"></canvas>
-  <div>
-    <label for="gravity">Enable gravity</label>
-    <input type="checkbox" id="gravity" checked />
-  </div>
-  <div>
-    <label for="movement">Enable moving center</label>
-    <input type="checkbox" id="movement" checked />
+  <div class="root">
+    <canvas id="glcanvas" width="800" height="600"></canvas>
+    <div>
+      <div>
+        <h4>Runtime settings</h4>
+        <div>
+          <label for="gravity">Enable gravity</label>
+          <input type="checkbox" id="gravity" checked />
+        </div>
+        <div>
+          <label for="movement">Enable moving center</label>
+          <input type="checkbox" id="movement" checked />
+        </div>
+      </div>
+      <div>
+        <h3>Simulation settings</h4>
+          <label for="size-input">Size:</label>
+          <input type="number" id="size-input" value="20" /><br />
+
+          <label for="length-coefficient-input">Length Coefficient:</label>
+          <input type="number" id="length-coefficient-input" value="1" /><br />
+
+          <label for="point-weight-input">Point Weight:</label>
+          <input type="number" id="point-weight-input" value="0.00005" /><br />
+
+          <label for="connection-coef-input">Connection Coefficient:</label>
+          <input type="number" id="connection-coef-input" value="30" /><br />
+
+          <label for="damping-input">Damping:</label>
+          <input type="number" id="damping-input" value="0.001" /><br />
+
+          <button id="run-button">Run</button>
+      </div>
+    </div>
   </div>
 </body>
 

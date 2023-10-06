@@ -1,3 +1,5 @@
+import { mat4 } from '/libs/gl-matrix.js'
+
 function drawScene(gl, programInfo, buffers, squareRotation, model, drawMode) {
   // gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
   // gl.clearDepth(1.0); // Clear everything
