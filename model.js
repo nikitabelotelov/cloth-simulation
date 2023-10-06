@@ -2,9 +2,9 @@ function clamp(val, min, max) {
   return Math.min(Math.max(val, min), max);
 }
 
-const POINT_WEIGHT = 0.01;
+const POINT_WEIGHT = 0.001;
 const CONNECTION_COEF = 1000;
-const DAMPING = 0.01;
+const DAMPING = 0.001;
 
 /**
  * Generates a cloth model with the given size.
