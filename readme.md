@@ -1,3 +1,7 @@
+## Demo
+
+You can play with the demo here [https://nikitabelotelov.github.io/clothSimulation/](https://nikitabelotelov.github.io/clothSimulation/)
+
 ## Run
 
 npx http-server
